@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Linq;
+using System.Text.Json;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Presentation;
 using D = DocumentFormat.OpenXml.Drawing;
@@ -93,6 +94,24 @@ internal class TestingOutOpenXML(string filePath)
                     masterParts.Add(ExtractMasterInfo(slideMasterPart));
         result["slideMasters"] = masterParts;
 
+        // Extract all slides
+        var slideInfos = new List<object>();
+        var slideIds = pptx.PresentationPart!.Presentation!.SlideIdList?.Elements<SlideId>();
+        if (slideIds != null)
+        {
+            foreach (var slideId in slideIds)
+            {
+                var relId = slideId.RelationshipId;
+                if (relId != null)
+                {
+                    var slidePart = (SlidePart)pptx.PresentationPart.GetPartById(relId!);
+                    if (slidePart.Slide != null && slideId.Id != null)
+                        slideInfos.Add(ExtractSlideInfo(slideId.Id.Value, slidePart));
+                }
+            }
+        }
+        result["slides"] = slideInfos;
+
         return result;
     }
 
@@ -143,24 +162,11 @@ internal class TestingOutOpenXML(string filePath)
 
     private static Dictionary<string, object> ExtractThemeInfo(ThemePart themePart)
     {
-        Dictionary<string, object> themeInfo = new();
-        if (
-            themePart.Theme.ThemeElements == null
-            || themePart.Theme.ThemeElements.ColorScheme == null
-        )
-        {
-            return themeInfo;
-        }
-        themeInfo["themeName"] = themePart.Theme.Name?.Value ?? "default-theme";
-        themeInfo["colorScheme"] = ExtractColorScheme(themePart.Theme.ThemeElements.ColorScheme);
-        return themeInfo;
-    }
-
-    private static Dictionary<string, object> ExtractColorScheme(D.ColorScheme colorScheme)
-    {
+        var colorScheme = themePart.Theme.ThemeElements?.ColorScheme;
+        if (colorScheme == null)
+            return new Dictionary<string, object>();
         return new Dictionary<string, object>
         {
-            ["name"] = colorScheme.Name?.Value ?? "Color scheme",
             ["dark1"] = colorScheme.Dark1Color?.RgbColorModelHex?.Val?.Value ?? "",
             ["light1"] = colorScheme.Light1Color?.RgbColorModelHex?.Val?.Value ?? "",
             ["dark2"] = colorScheme.Dark2Color?.RgbColorModelHex?.Val?.Value ?? "",
@@ -175,6 +181,31 @@ internal class TestingOutOpenXML(string filePath)
             ["followedHyperlink"] =
                 colorScheme.FollowedHyperlinkColor?.RgbColorModelHex?.Val?.Value ?? "",
         };
+    }
+
+    private static Dictionary<string, object> ExtractSlideInfo(uint id, SlidePart slidePart)
+    {
+        PrintDescendentTree(slidePart);
+        return new Dictionary<string, object>
+        {
+            ["slideId"] = id,
+            ["layoutName"] =
+                slidePart.SlideLayoutPart?.SlideLayout?.CommonSlideData?.Name?.Value ?? "",
+            ["texts"] = slidePart.Slide.Descendants<D.Text>().Select(t => t.Text).ToList(),
+        };
+    }
+
+    private static void PrintDescendentTree(SlidePart slidePart)
+    {
+        PrintElement(slidePart.Slide, 0);
+    }
+
+    private static void PrintElement(DocumentFormat.OpenXml.OpenXmlElement element, int level)
+    {
+        var indent = new string(' ', level * 4);
+        Console.WriteLine($"{indent}{element.GetType().Name}");
+        foreach (var child in element.Elements())
+            PrintElement(child, level + 1);
     }
 
     private static void AnalyzePresentationPropertiesStructure(PresentationDocument pptx)
