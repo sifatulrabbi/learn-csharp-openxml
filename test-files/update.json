@@ -106,178 +106,179 @@
     {
       "SlideId": 256,
       "LayoutName": "Title Slide",
-      "Texts": ["Updated Basic Presentation"]
+      "Texts": [
+        "TeleComX AI Chatbot Proposal",
+        "TEST - Response to TeleComX",
+        "Prepared by: James SEQUESTO & Sifatul Rabbi"
+      ]
     },
     {
       "SlideId": 257,
       "LayoutName": "Title and Content",
       "Texts": [
         "Agenda",
-        "Introduction",
-        "Building confidence",
-        "Engaging the audience",
-        "Visual aids",
-        "Final tips \u0026 takeaways"
+        "Project Overview",
+        "Client Needs & Pain Points",
+        "Our Solution & Approach",
+        "Key Features & Architecture",
+        "Compliance & Security",
+        "Implementation Plan",
+        "Success Metrics",
+        "Team & Contacts",
+        "Q\u0026A"
       ]
     },
     {
       "SlideId": 286,
       "LayoutName": "Title and Right Image",
-      "Texts": ["The power of communication"]
+      "Texts": [
+        "Project Overview",
+        "TeleComX: Leading telecom in Bangladesh, 10M+ customers",
+        "Goal: AI-powered, 24/7, bilingual (English/Bengali) customer support chatbot",
+        "Integrations: Web (React), Mobile (Flutter), CRM (Salesforce), Ticketing (Zendesk)"
+      ]
     },
     {
       "SlideId": 288,
       "LayoutName": "Title and Left Image",
-      "Texts": ["Overcoming nervousness", "Confidence-building strategies"]
+      "Texts": [
+        "Client Needs & Pain Points",
+        "Manual triage & routing delays",
+        "Limited self-service options",
+        "Slow escalation for complex issues",
+        "High agent workload from repetitive queries"
+      ]
     },
     {
       "SlideId": 289,
       "LayoutName": "Title and content 2",
       "Texts": [
-        "Engaging the audience",
-        "Make eye contact with your audience to create a sense of intimacy and involvement",
-        "Weave relatable stories into your presentation using narratives that\u00A0make your message memorable and impactful",
-        "Encourage questions and provide thoughtful responses to\u00A0enhance audience participation",
-        "Use live polls or surveys to gather audience opinions, promoting engagement and making sure\u00A0the audience feel involved"
+        "Our Solution & Approach",
+        "AI chatbot with natural language understanding & context awareness",
+        "Automate responses to common queries (target: 80%+ auto-resolution)",
+        "Seamless escalation to human agents with conversation history",
+        "Bilingual support (English & Bengali)",
+        "Integration with CRM & ticketing for personalized responses",
+        "Secure, scalable, and compliant cloud-based system"
       ]
     },
     {
       "SlideId": 297,
       "LayoutName": "Section title",
-      "Texts": ["Selecting ", "visual aids", "Enhancing your presentation"]
+      "Texts": [
+        "Key Features & Architecture",
+        "RESTful APIs, secure OAuth2, audit logging",
+        "Admin dashboard, analytics, multi-platform widgets"
+      ]
     },
     {
       "SlideId": 290,
       "LayoutName": "Title and 2 Column Content",
       "Texts": [
-        "Effective delivery techniques",
-        "This is a powerful tool in public speaking. It involves varying pitch, tone, and volume to convey emotion, emphasize points, and maintain interest: ",
-        "Pitch variation",
-        "Tone inflection",
-        "Volume control",
-        "Effective body language enhances your message, making it more impactful ",
-        "and memorable:",
-        "Meaningful eye contact",
-        "Purposeful gestures",
-        "Maintain good posture",
-        "Control your expressions"
+        "Technical Architecture",
+        "AI Chatbot Engine (NLU, context management)",
+        "CRM Integration (Salesforce API)",
+        "Ticketing Integration (Zendesk API)",
+        "Admin Dashboard (monitoring, analytics)",
+        "Web/Mobile Widgets (React, Flutter)",
+        "Secure API Gateway",
+        "Data Encryption (TLS, AES-256)",
+        "High Availability, Cloud Deployment"
       ]
     },
     {
       "SlideId": 291,
       "LayoutName": "Title and 2 content",
       "Texts": [
-        "Navigating Q\u0026A sessions",
-        "Know your material in advance",
-        "Anticipate common questions",
-        "Rehearse your responses",
-        "Maintaining composure during the Q\u0026A session is essential for projecting confidence and authority. Consider the following tips for staying composed:",
-        "Stay calm",
-        "Actively listen",
-        "Pause and reflect",
-        "Maintain eye contact"
+        "Compliance & Security",
+        "GDPR & Bangladesh Data Protection compliance",
+        "Role-based access, in-country data storage",
+        "End-to-end encryption (in transit & at rest)",
+        "Audit logs & monitoring",
+        "Breach reporting within 24h",
+        "Mandatory privacy & security training",
+        "Vendor & sub-processor compliance"
       ]
     },
     {
       "SlideId": 292,
       "LayoutName": "Title and Content and Image 1",
       "Texts": [
-        "Speaking impact ",
-        "Your ability to communicate effectively will leave a lasting impact on your audience",
-        "Effectively communicating involves not only delivering a message but also resonating with the experiences, values, and emotions of those listening\u00A0"
+        "Implementation Plan & Milestones",
+        "Discovery & requirements (with TeleComX stakeholders)",
+        "Development & integration (AI, CRM, ticketing, widgets)",
+        "Testing & QA (functional, security, performance)",
+        "Training & documentation for staff",
+        "Deployment & go-live",
+        "Support & maintenance (6+ months)"
       ]
     },
     {
       "SlideId": 295,
       "LayoutName": "SmartArt 2",
       "Texts": [
-        "Dynamic delivery",
-        "Learn to infuse energy into your delivery to leave a lasting impression",
-        "One of the goals of effective communication is to motivate your audience",
+        "Success Metrics",
         "Metric",
-        "Measurement",
         "Target",
-        "Actual",
-        "Audience attendance",
-        "# of attendees",
-        "150",
-        "120",
-        "Engagement duration",
-        "Minutes",
-        "60",
-        "75",
-        "Q\u0026A interaction",
-        "# of questions",
-        "10",
-        "15",
-        "Positive feedback",
-        "Percentage (%)",
-        "90",
-        "95",
-        "Rate of information retention",
-        "Percentage (%)",
-        "80",
-        "85"
+        "Current/Expected",
+        "CSAT Improvement (%)",
+        "10%",
+        "-",
+        "Agent Workload Reduction (%)",
+        "30%",
+        "-",
+        "Query Automation (%)",
+        "80%",
+        "-",
+        "Response Time (seconds)",
+        "<30",
+        "-",
+        "Resolution Rate (%)",
+        "90%",
+        "-",
+        "Compliance Incidents",
+        "0",
+        "-"
       ]
     },
     {
       "SlideId": 294,
       "LayoutName": "Title and Content and Image 2",
       "Texts": [
-        "Final tips \u0026 takeaways",
-        "Seek feedback",
-        "Reflect on performance",
-        "Explore new techniques",
-        "Set personal goals",
-        "Iterate and adapt",
-        "Consistent rehearsal",
-        "Strengthen your familiarity",
-        "Refine delivery style",
-        "Pacing, tone, and emphasis",
-        "Timing and transitions",
-        "Aim for seamless, professional delivery",
-        "Practice audience",
-        "Enlist colleagues to listen \u0026 provide feedback"
+        "Team & Key Contacts",
+        "James SEQUESTO",
+        "Sifatul Rabbi",
+        "Farhana Rahman, Executive Sponsor (farhana.rahman@telecomx.com)",
+        "Imran Hossain, Project Owner (imran.hossain@telecomx.com)",
+        "See proposal for full contact list & bios"
       ]
     },
     {
       "SlideId": 298,
       "LayoutName": "Chart ",
       "Texts": [
-        "Speaking engagement metrics",
-        "Impact factor",
-        "Measurement",
-        "Target",
-        "Achieved",
-        "Audience interaction",
-        "Percentage (%)",
-        "85",
-        "88",
-        "Knowledge retention",
-        "Percentage (%)",
-        "75",
-        "80",
-        "Post-presentation surveys",
-        "Average rating",
-        "4.2",
-        "4.5",
-        "Referral rate",
-        "Percentage (%)",
-        "10",
-        "12",
-        "Collaboration opportunities",
-        "# of opportunities",
-        "8",
-        "10"
+        "Project Timeline",
+        "Milestone",
+        "Date",
+        "RFP Release",
+        "May 10, 2025",
+        "Questions Due",
+        "May 17, 2025",
+        "Proposal Submission",
+        "May 24, 2025",
+        "Vendor Selection",
+        "June 1, 2025",
+        "Project Kickoff",
+        "June 10, 2025"
       ]
     },
     {
       "SlideId": 296,
       "LayoutName": "End Slide",
       "Texts": [
-        "Thank you",
-        "Sifatul Rabbi",
-        "502-555-0152",
+        "Thank you for your consideration",
+        "Questions?",
+        "Contact: rfp@telecomx.com",
         "sifatul.rabbi@sequesto.com",
         "sifatulrabbi.com"
       ]
