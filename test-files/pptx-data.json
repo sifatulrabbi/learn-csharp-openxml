@@ -1,0 +1,297 @@
+{
+  "Title": "Testing presentation with James",
+  "Subject": "Testing",
+  "Description": "",
+  "Creator": "James SEQUESTO",
+  "Created": "2023-12-12T22:04:07+06:00",
+  "Modified": "2025-07-18T10:07:01.634494+06:00",
+  "SlideSize": {
+    "Width": 12192000,
+    "Height": 6858000,
+    "Type": ""
+  },
+  "NoteSize": {
+    "Width": 6858000,
+    "Height": 9144000
+  },
+  "GlobalTheme": {
+    "Dark1": "000000",
+    "Light1": "FFFFFF",
+    "Dark2": "44546A",
+    "Light2": "E7E6E6",
+    "Accent1": "0068FF",
+    "Accent2": "DAE5EF",
+    "Accent3": "637183",
+    "Accent4": "434E5E",
+    "Accent5": "5B9BD5",
+    "Accent6": "70AD47",
+    "Hyperlink": "0563C1",
+    "FollowedHyperlink": "954F72"
+  },
+  "SlideMasters": [
+    {
+      "Name": "slide-master-part",
+      "SlideLayoutIds": [],
+      "SlideLayouts": [
+        {
+          "Name": "Title and 2 content",
+          "TypeName": ""
+        },
+        {
+          "Name": "End Slide",
+          "TypeName": "title"
+        },
+        {
+          "Name": "Title and Right Image",
+          "TypeName": ""
+        },
+        {
+          "Name": "Title and 2 Column Content",
+          "TypeName": ""
+        },
+        {
+          "Name": "Chart ",
+          "TypeName": "obj"
+        },
+        {
+          "Name": "Title and Content",
+          "TypeName": "obj"
+        },
+        {
+          "Name": "Title Slide",
+          "TypeName": ""
+        },
+        {
+          "Name": "Section title",
+          "TypeName": "title"
+        },
+        {
+          "Name": "Title and Content and Image 2",
+          "TypeName": ""
+        },
+        {
+          "Name": "Title and content 2",
+          "TypeName": ""
+        },
+        {
+          "Name": "SmartArt 2",
+          "TypeName": ""
+        },
+        {
+          "Name": "Title and Left Image",
+          "TypeName": ""
+        },
+        {
+          "Name": "Title and Content and Image 1",
+          "TypeName": ""
+        }
+      ],
+      "Theme": {
+        "Dark1": "000000",
+        "Light1": "FFFFFF",
+        "Dark2": "44546A",
+        "Light2": "E7E6E6",
+        "Accent1": "0068FF",
+        "Accent2": "DAE5EF",
+        "Accent3": "637183",
+        "Accent4": "434E5E",
+        "Accent5": "5B9BD5",
+        "Accent6": "70AD47",
+        "Hyperlink": "0563C1",
+        "FollowedHyperlink": "954F72"
+      }
+    }
+  ],
+  "Slides": [
+    {
+      "SlideId": 256,
+      "LayoutName": "Title Slide",
+      "Texts": [
+        "Updated Basic Presentation"
+      ]
+    },
+    {
+      "SlideId": 257,
+      "LayoutName": "Title and Content",
+      "Texts": [
+        "Agenda",
+        "Introduction",
+        "Building confidence",
+        "Engaging the audience",
+        "Visual aids",
+        "Final tips \u0026 takeaways"
+      ]
+    },
+    {
+      "SlideId": 286,
+      "LayoutName": "Title and Right Image",
+      "Texts": [
+        "The power of communication"
+      ]
+    },
+    {
+      "SlideId": 288,
+      "LayoutName": "Title and Left Image",
+      "Texts": [
+        "Overcoming nervousness",
+        "Confidence-building strategies"
+      ]
+    },
+    {
+      "SlideId": 289,
+      "LayoutName": "Title and content 2",
+      "Texts": [
+        "Engaging the audience",
+        "Make eye contact with your audience to create a sense of intimacy and involvement",
+        "Weave relatable stories into your presentation using narratives that\u00A0make your message memorable and impactful",
+        "Encourage questions and provide thoughtful responses to\u00A0enhance audience participation",
+        "Use live polls or surveys to gather audience opinions, promoting engagement and making sure\u00A0the audience feel involved"
+      ]
+    },
+    {
+      "SlideId": 297,
+      "LayoutName": "Section title",
+      "Texts": [
+        "Selecting ",
+        "visual aids",
+        "Enhancing your presentation"
+      ]
+    },
+    {
+      "SlideId": 290,
+      "LayoutName": "Title and 2 Column Content",
+      "Texts": [
+        "Effective delivery techniques",
+        "This is a powerful tool in public speaking. It involves varying pitch, tone, and volume to convey emotion, emphasize points, and maintain interest: ",
+        "Pitch variation",
+        "Tone inflection",
+        "Volume control",
+        "Effective body language enhances your message, making it more impactful ",
+        "and memorable:",
+        "Meaningful eye contact",
+        "Purposeful gestures",
+        "Maintain good posture",
+        "Control your expressions"
+      ]
+    },
+    {
+      "SlideId": 291,
+      "LayoutName": "Title and 2 content",
+      "Texts": [
+        "Navigating Q\u0026A sessions",
+        "Know your material in advance",
+        "Anticipate common questions",
+        "Rehearse your responses",
+        "Maintaining composure during the Q\u0026A session is essential for projecting confidence and authority. Consider the following tips for staying composed:",
+        "Stay calm",
+        "Actively listen",
+        "Pause and reflect",
+        "Maintain eye contact"
+      ]
+    },
+    {
+      "SlideId": 292,
+      "LayoutName": "Title and Content and Image 1",
+      "Texts": [
+        "Speaking impact ",
+        "Your ability to communicate effectively will leave a lasting impact on your audience",
+        "Effectively communicating involves not only delivering a message but also resonating with the experiences, values, and emotions of those listening\u00A0"
+      ]
+    },
+    {
+      "SlideId": 295,
+      "LayoutName": "SmartArt 2",
+      "Texts": [
+        "Dynamic delivery",
+        "Learn to infuse energy into your delivery to leave a lasting impression",
+        "One of the goals of effective communication is to motivate your audience",
+        "Metric",
+        "Measurement",
+        "Target",
+        "Actual",
+        "Audience attendance",
+        "# of attendees",
+        "150",
+        "120",
+        "Engagement duration",
+        "Minutes",
+        "60",
+        "75",
+        "Q\u0026A interaction",
+        "# of questions",
+        "10",
+        "15",
+        "Positive feedback",
+        "Percentage (%)",
+        "90",
+        "95",
+        "Rate of information retention",
+        "Percentage (%)",
+        "80",
+        "85"
+      ]
+    },
+    {
+      "SlideId": 294,
+      "LayoutName": "Title and Content and Image 2",
+      "Texts": [
+        "Final tips \u0026 takeaways",
+        "Seek feedback",
+        "Reflect on performance",
+        "Explore new techniques",
+        "Set personal goals",
+        "Iterate and adapt",
+        "Consistent rehearsal",
+        "Strengthen your familiarity",
+        "Refine delivery style",
+        "Pacing, tone, and emphasis",
+        "Timing and transitions",
+        "Aim for seamless, professional delivery",
+        "Practice audience",
+        "Enlist colleagues to listen \u0026 provide feedback"
+      ]
+    },
+    {
+      "SlideId": 298,
+      "LayoutName": "Chart ",
+      "Texts": [
+        "Speaking engagement metrics",
+        "Impact factor",
+        "Measurement",
+        "Target",
+        "Achieved",
+        "Audience interaction",
+        "Percentage (%)",
+        "85",
+        "88",
+        "Knowledge retention",
+        "Percentage (%)",
+        "75",
+        "80",
+        "Post-presentation surveys",
+        "Average rating",
+        "4.2",
+        "4.5",
+        "Referral rate",
+        "Percentage (%)",
+        "10",
+        "12",
+        "Collaboration opportunities",
+        "# of opportunities",
+        "8",
+        "10"
+      ]
+    },
+    {
+      "SlideId": 296,
+      "LayoutName": "End Slide",
+      "Texts": [
+        "Thank you",
+        "Sifatul Rabbi",
+        "502-555-0152",
+        "sifatul.rabbi@sequesto.com",
+        "sifatulrabbi.com"
+      ]
+    }
+  ]
+}
