@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Text.Json;
+﻿using System.Text.Json;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Presentation;
 using D = DocumentFormat.OpenXml.Drawing;
@@ -28,25 +27,26 @@ internal class TestingOutOpenXML(string filePath)
     public void TestOutPptxFile()
     {
         using PresentationDocument pptx = PresentationDocument.Open(filePath, true);
-        if (pptx.PresentationPart == null || pptx.PresentationPart.Presentation == null)
-        {
-            throw new MissingMemberException(
-                nameof(PresentationDocument),
-                "Presentation or PresentationPart is not found!"
-            );
-        }
-        // AnalyzePresentationPropertiesStructure(pptx);
-
-        var extractedInfo = ExtractAllSlideMasterAndThemeInfo(pptx);
+        PptxDataExtractor extractor = new(pptx);
+        var extractedInfo = extractor.ExtractAll();
         Console.WriteLine(JsonSerializer.Serialize(extractedInfo, jsonSerializerOptions));
+
+        // Test text modification
+        PptxDataModifier modifier = new(pptx);
+        modifier.ModifySlideTextTest();
+
+        // AnalyzePresentationPropertiesStructure(pptx);
 
         pptx.Save();
         pptx.Dispose();
     }
+}
 
-    private static Dictionary<string, object> ExtractAllSlideMasterAndThemeInfo(
-        PresentationDocument pptx
-    )
+internal class PptxDataExtractor
+{
+    private PresentationDocument pptx;
+
+    public PptxDataExtractor(PresentationDocument pptx)
     {
         if (pptx.PresentationPart == null || pptx.PresentationPart.Presentation == null)
         {
@@ -55,204 +55,333 @@ internal class TestingOutOpenXML(string filePath)
                 "Presentation or PresentationPart is not found!"
             );
         }
+        this.pptx = pptx;
+    }
 
-        Dictionary<string, object> result = new();
+    public PresentationData ExtractAll()
+    {
+        // Extract presentation metadata
+        var coreProps = pptx.PackageProperties;
+        var title = coreProps.Title ?? "";
+        var subject = coreProps.Subject ?? "";
+        var description = coreProps.Description ?? "";
+        var creator = coreProps.Creator ?? "";
+        var created = coreProps.Created ?? DateTime.MinValue;
+        var modified = coreProps.Modified ?? DateTime.MinValue;
 
-        // Extract presentation-level properties
-        if (pptx.PresentationPart.Presentation.SlideSize != null)
+        // Extract slide size
+        var slideSize = new SlideSize
         {
-            var slideSize = pptx.PresentationPart.Presentation.SlideSize;
-            result["slideSize"] = new Dictionary<string, object>
-            {
-                ["width"] = slideSize.Cx?.Value ?? 0,
-                ["height"] = slideSize.Cy?.Value ?? 0,
-                ["type"] = slideSize.Type?.ToString() ?? "",
-            };
-        }
-        if (pptx.PresentationPart.Presentation?.NotesSize != null)
+            Width = pptx.PresentationPart!.Presentation!.SlideSize?.Cx?.Value ?? 0,
+            Height = pptx.PresentationPart.Presentation.SlideSize?.Cy?.Value ?? 0,
+            Type = pptx.PresentationPart.Presentation.SlideSize?.Type?.ToString() ?? "",
+        };
+
+        // Extract note size
+        var noteSize = new NoteSize
         {
-            var noteSize = pptx.PresentationPart.Presentation.NotesSize;
-            result["noteSize"] = new Dictionary<string, object>
-            {
-                ["width"] = noteSize.Cx?.Value ?? 0,
-                ["height"] = noteSize.Cy?.Value ?? 0,
-            };
-        }
+            Width = pptx.PresentationPart.Presentation.NotesSize?.Cx?.Value ?? 0,
+            Height = pptx.PresentationPart.Presentation.NotesSize?.Cy?.Value ?? 0,
+        };
 
         // Extract presentation-level theme (even when masters exist)
-        if (
-            pptx.PresentationPart.ThemePart != null
-            && pptx.PresentationPart.ThemePart.Theme != null
-        )
-            result["globalTheme"] = ExtractThemeInfo(pptx.PresentationPart.ThemePart);
+        var globalTheme =
+            pptx.PresentationPart.ThemePart != null && pptx.PresentationPart.ThemePart.Theme != null
+                ? ExtractThemeInfo(pptx.PresentationPart.ThemePart)
+                : new Theme
+                {
+                    Dark1 = "",
+                    Light1 = "",
+                    Dark2 = "",
+                    Light2 = "",
+                    Accent1 = "",
+                    Accent2 = "",
+                    Accent3 = "",
+                    Accent4 = "",
+                    Accent5 = "",
+                    Accent6 = "",
+                    Hyperlink = "",
+                    FollowedHyperlink = "",
+                };
 
         // Extract slide masters
-        List<object> masterParts = [];
-        if (pptx.PresentationPart?.SlideMasterParts != null)
-            foreach (var slideMasterPart in pptx.PresentationPart.SlideMasterParts)
-                if (slideMasterPart.SlideMaster != null)
-                    masterParts.Add(ExtractMasterInfo(slideMasterPart));
-        result["slideMasters"] = masterParts;
+        var masterParts = new List<SlideMaster>();
+        foreach (var slideMasterPart in pptx.PresentationPart.SlideMasterParts)
+            if (slideMasterPart.SlideMaster != null)
+                masterParts.Add(ExtractMasterInfo(slideMasterPart));
 
         // Extract all slides
-        var slideInfos = new List<object>();
-        var slideIds = pptx.PresentationPart!.Presentation!.SlideIdList?.Elements<SlideId>();
+        var slideInfos = new List<Slide>();
+        var slideIds = pptx.PresentationPart.Presentation!.SlideIdList?.Elements<SlideId>();
         if (slideIds != null)
-        {
             foreach (var slideId in slideIds)
             {
                 var relId = slideId.RelationshipId;
                 if (relId != null)
                 {
-                    var slidePart = (SlidePart)pptx.PresentationPart.GetPartById(relId!);
+                    var slidePart = (SlidePart)pptx.PresentationPart.GetPartById(relId.Value!);
                     if (slidePart.Slide != null && slideId.Id != null)
                         slideInfos.Add(ExtractSlideInfo(slideId.Id.Value, slidePart));
                 }
             }
-        }
-        result["slides"] = slideInfos;
 
-        return result;
+        return new PresentationData
+        {
+            Title = title,
+            Subject = subject,
+            Description = description,
+            Creator = creator,
+            Created = created,
+            Modified = modified,
+            SlideSize = slideSize,
+            NoteSize = noteSize,
+            GlobalTheme = globalTheme,
+            SlideMasters = masterParts,
+            Slides = slideInfos,
+        };
     }
 
-    private static Dictionary<string, object> ExtractMasterInfo(SlideMasterPart masterPart)
+    private static SlideMaster ExtractMasterInfo(SlideMasterPart masterPart)
     {
-        Dictionary<string, object> slideMasterInfo = new();
-        if (masterPart.SlideMaster != null)
+        var name = masterPart.SlideMaster?.CommonSlideData?.Name?.Value ?? "slide-master-part";
+
+        // Extract layout IDs for slide masters
+        var slideLayoutIdList = new List<string>();
+        if (masterPart.SlideMaster?.SlideLayoutIdList != null)
         {
-            slideMasterInfo["name"] =
-                masterPart.SlideMaster.CommonSlideData?.Name?.Value ?? "slide-master-part";
-            // Extract layout count for slide masters
-            if (masterPart.SlideMaster.SlideLayoutIdList != null)
+            foreach (var id in masterPart.SlideMaster.SlideLayoutIdList.Elements())
             {
-                var slideLayoutIdList = new List<object>();
-                foreach (var id in masterPart.SlideMaster.SlideLayoutIdList.Elements())
-                {
-                    if (id != null && !string.IsNullOrEmpty(id.InnerText))
-                        slideLayoutIdList.Add(id.InnerText);
-                }
-                slideMasterInfo["slideLayoutIds"] = slideLayoutIdList;
+                if (id != null && !string.IsNullOrEmpty(id.InnerText))
+                    slideLayoutIdList.Add(id.InnerText);
             }
         }
+
         // Extract layouts for slide masters
+        var layoutParts = new List<SlideLayout>();
         if (masterPart.SlideLayoutParts != null)
         {
-            var layoutParts = new List<object>();
             foreach (var layoutPart in masterPart.SlideLayoutParts)
                 layoutParts.Add(ExtractLayoutInfo(layoutPart));
-            slideMasterInfo["slideLayouts"] = layoutParts;
         }
+
         // Extract theme information
-        if (masterPart.ThemePart != null)
-            slideMasterInfo["theme"] = ExtractThemeInfo(masterPart.ThemePart);
+        var theme =
+            masterPart.ThemePart != null
+                ? ExtractThemeInfo(masterPart.ThemePart)
+                : new Theme
+                {
+                    Dark1 = "",
+                    Light1 = "",
+                    Dark2 = "",
+                    Light2 = "",
+                    Accent1 = "",
+                    Accent2 = "",
+                    Accent3 = "",
+                    Accent4 = "",
+                    Accent5 = "",
+                    Accent6 = "",
+                    Hyperlink = "",
+                    FollowedHyperlink = "",
+                };
 
-        return slideMasterInfo;
+        return new SlideMaster
+        {
+            Name = name,
+            SlideLayoutIds = slideLayoutIdList,
+            SlideLayouts = layoutParts,
+            Theme = theme,
+        };
     }
 
-    private static Dictionary<string, object> ExtractLayoutInfo(SlideLayoutPart layoutPart)
+    private static SlideLayout ExtractLayoutInfo(SlideLayoutPart layoutPart)
     {
-        var layoutInfo = new Dictionary<string, object>();
         var layout = layoutPart.SlideLayout;
-        if (layout == null)
-            return layoutInfo;
-        layoutInfo["name"] = layout.CommonSlideData?.Name?.Value ?? "Default layout";
-        layoutInfo["typeName"] = layout.Type?.ToString() ?? "";
-        return layoutInfo;
+        return new SlideLayout
+        {
+            Name = layout?.CommonSlideData?.Name?.Value ?? "Default layout",
+            TypeName = layout?.Type?.ToString() ?? "",
+        };
     }
 
-    private static Dictionary<string, object> ExtractThemeInfo(ThemePart themePart)
+    private static Theme ExtractThemeInfo(ThemePart themePart)
     {
         var colorScheme = themePart.Theme.ThemeElements?.ColorScheme;
         if (colorScheme == null)
-            return new Dictionary<string, object>();
-        return new Dictionary<string, object>
+            return new Theme
+            {
+                Dark1 = "",
+                Light1 = "",
+                Dark2 = "",
+                Light2 = "",
+                Accent1 = "",
+                Accent2 = "",
+                Accent3 = "",
+                Accent4 = "",
+                Accent5 = "",
+                Accent6 = "",
+                Hyperlink = "",
+                FollowedHyperlink = "",
+            };
+
+        return new Theme
         {
-            ["dark1"] = colorScheme.Dark1Color?.RgbColorModelHex?.Val?.Value ?? "",
-            ["light1"] = colorScheme.Light1Color?.RgbColorModelHex?.Val?.Value ?? "",
-            ["dark2"] = colorScheme.Dark2Color?.RgbColorModelHex?.Val?.Value ?? "",
-            ["light2"] = colorScheme.Light2Color?.RgbColorModelHex?.Val?.Value ?? "",
-            ["accent1"] = colorScheme.Accent1Color?.RgbColorModelHex?.Val?.Value ?? "",
-            ["accent2"] = colorScheme.Accent2Color?.RgbColorModelHex?.Val?.Value ?? "",
-            ["accent3"] = colorScheme.Accent3Color?.RgbColorModelHex?.Val?.Value ?? "",
-            ["accent4"] = colorScheme.Accent4Color?.RgbColorModelHex?.Val?.Value ?? "",
-            ["accent5"] = colorScheme.Accent5Color?.RgbColorModelHex?.Val?.Value ?? "",
-            ["accent6"] = colorScheme.Accent6Color?.RgbColorModelHex?.Val?.Value ?? "",
-            ["hyperlink"] = colorScheme.Hyperlink?.RgbColorModelHex?.Val?.Value ?? "",
-            ["followedHyperlink"] =
+            Dark1 = colorScheme.Dark1Color?.RgbColorModelHex?.Val?.Value ?? "",
+            Light1 = colorScheme.Light1Color?.RgbColorModelHex?.Val?.Value ?? "",
+            Dark2 = colorScheme.Dark2Color?.RgbColorModelHex?.Val?.Value ?? "",
+            Light2 = colorScheme.Light2Color?.RgbColorModelHex?.Val?.Value ?? "",
+            Accent1 = colorScheme.Accent1Color?.RgbColorModelHex?.Val?.Value ?? "",
+            Accent2 = colorScheme.Accent2Color?.RgbColorModelHex?.Val?.Value ?? "",
+            Accent3 = colorScheme.Accent3Color?.RgbColorModelHex?.Val?.Value ?? "",
+            Accent4 = colorScheme.Accent4Color?.RgbColorModelHex?.Val?.Value ?? "",
+            Accent5 = colorScheme.Accent5Color?.RgbColorModelHex?.Val?.Value ?? "",
+            Accent6 = colorScheme.Accent6Color?.RgbColorModelHex?.Val?.Value ?? "",
+            Hyperlink = colorScheme.Hyperlink?.RgbColorModelHex?.Val?.Value ?? "",
+            FollowedHyperlink =
                 colorScheme.FollowedHyperlinkColor?.RgbColorModelHex?.Val?.Value ?? "",
         };
     }
 
-    private static Dictionary<string, object> ExtractSlideInfo(uint id, SlidePart slidePart)
+    private static Slide ExtractSlideInfo(uint id, SlidePart slidePart)
     {
         PrintDescendentTree(slidePart);
-        return new Dictionary<string, object>
+        return new Slide
         {
-            ["slideId"] = id,
-            ["layoutName"] =
-                slidePart.SlideLayoutPart?.SlideLayout?.CommonSlideData?.Name?.Value ?? "",
-            ["texts"] = slidePart.Slide.Descendants<D.Text>().Select(t => t.Text).ToList(),
+            SlideId = id,
+            LayoutName = slidePart.SlideLayoutPart?.SlideLayout?.CommonSlideData?.Name?.Value ?? "",
+            Texts = slidePart.Slide.Descendants<D.Text>().Select(t => t.Text).ToList(),
         };
     }
 
     private static void PrintDescendentTree(SlidePart slidePart)
     {
-        PrintElement(slidePart.Slide, 0);
+        var shapeTrees = slidePart.Slide.Descendants<ShapeTree>();
+        Console.WriteLine($"{slidePart.Slide.LocalName}, Found {shapeTrees.Count()} shape trees");
+        foreach (var shapeTree in shapeTrees)
+            PrintElement(shapeTree, 1);
     }
 
     private static void PrintElement(DocumentFormat.OpenXml.OpenXmlElement element, int level)
     {
-        var indent = new string(' ', level * 4);
+        var indent = new string(' ', level * 2);
         Console.WriteLine($"{indent}{element.GetType().Name}");
         foreach (var child in element.Elements())
             PrintElement(child, level + 1);
     }
+}
 
-    private static void AnalyzePresentationPropertiesStructure(PresentationDocument pptx)
+internal class PptxDataModifier
+{
+    private PresentationDocument pptx;
+
+    public PptxDataModifier(PresentationDocument pptx)
     {
-        Console.WriteLine("--- Old values ---");
-        var coreProps = pptx.PackageProperties;
-        Console.WriteLine("Title:           " + coreProps.Title);
-        Console.WriteLine("Subject:         " + coreProps.Subject);
-        Console.WriteLine("Creator:         " + coreProps.Creator);
-        Console.WriteLine("Keywords:        " + coreProps.Keywords);
-        Console.WriteLine("Description:     " + coreProps.Description);
-        Console.WriteLine("Last Modified By:" + coreProps.LastModifiedBy);
-        Console.WriteLine("Revision:        " + coreProps.Revision);
-        Console.WriteLine("Created:         " + coreProps.Created);
-        Console.WriteLine("Modified:        " + coreProps.Modified);
-
-        var extPart = pptx.ExtendedFilePropertiesPart;
-        if (extPart != null)
+        if (pptx.PresentationPart == null || pptx.PresentationPart.Presentation == null)
         {
-            var props = extPart.Properties;
-            Console.WriteLine();
-            Console.WriteLine("Application:         " + props.Application?.Text);
-            Console.WriteLine("Company:             " + props.Company?.Text);
-            Console.WriteLine("Manager:             " + props.Manager?.Text);
-            Console.WriteLine("Total Editing Time:  " + props.TotalTime?.Text + " minutes");
-            Console.WriteLine("Presentation Format: " + props.PresentationFormat?.Text);
+            throw new MissingMemberException(
+                nameof(PresentationDocument),
+                "Presentation or PresentationPart is not found!"
+            );
+        }
+        this.pptx = pptx;
+    }
+
+    public void ModifySlideTextTest()
+    {
+        var textToFind = "Basic presentation";
+        var newText = "Updated Basic Presentation";
+
+        var slideToChange = pptx.PresentationPart!.SlideParts.FirstOrDefault(sp =>
+            sp.Slide.Descendants<D.Text>().Any(t => t.Text == textToFind)
+        );
+
+        if (slideToChange != null)
+        {
+            var updated = TryUpdateSlideText(slideToChange, textToFind, newText);
+            Console.WriteLine(
+                updated
+                    ? $"Successfully updated text from '{textToFind}' to '{newText}'"
+                    : $"Failed to update text '{textToFind}'"
+            );
         }
         else
         {
-            Console.WriteLine("No extended properties found.");
+            Console.WriteLine($"No slide found containing text '{textToFind}'");
         }
+    }
 
-        Console.WriteLine("--- New values ---");
-
-        coreProps.Modified = DateTime.Now;
-        Console.WriteLine("+ Modified:        " + coreProps.Modified);
+    private static bool TryUpdateSlideText(SlidePart slidePart, string oldText, string newText)
+    {
+        var texts = slidePart.Slide.Descendants<D.Text>().Where(t => t.Text == oldText).ToList();
+        if (texts.Count == 0)
+            return false;
+        foreach (var t in texts)
+            t.Text = newText;
+        slidePart.Slide.Save();
+        return true;
     }
 }
 
-// public class PresentationData
-// {
-//     public required string Title { get; set; }
-//     public required string Subject { get; set; }
-//     public required string Description { get; set; }
-//     public string Creator { get; set; } = "James";
-//     public DateTime Created { get; set; } = DateTime.UtcNow;
-//     public DateTime Modified { get; set; } = DateTime.UtcNow;
+public class PresentationData
+{
+    public required string Title { get; set; }
+    public required string Subject { get; set; }
+    public required string Description { get; set; }
+    public string Creator { get; set; } = "James SEQUESTO";
+    public DateTime Created { get; set; } = DateTime.UtcNow;
+    public DateTime Modified { get; set; } = DateTime.UtcNow;
+    public required SlideSize SlideSize { get; set; }
+    public required NoteSize NoteSize { get; set; }
+    public required Theme GlobalTheme { get; set; }
+    public required List<SlideMaster> SlideMasters { get; set; }
+    public required List<Slide> Slides { get; set; }
+}
 
-//     public required PresentationTheme Theme { get; set; }
-// }
+public class SlideSize
+{
+    public required long Width { get; set; }
+    public required long Height { get; set; }
+    public required string Type { get; set; }
+}
+
+public class NoteSize
+{
+    public required long Width { get; set; }
+    public required long Height { get; set; }
+}
+
+public class Theme
+{
+    public required string Dark1 { get; set; }
+    public required string Light1 { get; set; }
+    public required string Dark2 { get; set; }
+    public required string Light2 { get; set; }
+    public required string Accent1 { get; set; }
+    public required string Accent2 { get; set; }
+    public required string Accent3 { get; set; }
+    public required string Accent4 { get; set; }
+    public required string Accent5 { get; set; }
+    public required string Accent6 { get; set; }
+    public required string Hyperlink { get; set; }
+    public required string FollowedHyperlink { get; set; }
+}
+
+public class SlideMaster
+{
+    public required string Name { get; set; }
+    public required List<string> SlideLayoutIds { get; set; }
+    public required List<SlideLayout> SlideLayouts { get; set; }
+    public required Theme Theme { get; set; }
+}
+
+public class SlideLayout
+{
+    public required string Name { get; set; }
+    public required string TypeName { get; set; }
+}
+
+public class Slide
+{
+    public required uint SlideId { get; set; }
+    public required string LayoutName { get; set; }
+    public required List<string> Texts { get; set; }
+}
