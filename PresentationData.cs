@@ -70,12 +70,29 @@ public class SlideContent
     public required string ContentType { get; set; }
     public string? Text { get; set; }
     public string? ImageUrl { get; set; }
-    public string? ImageBase64 { get; set; }
+    public TableContent? Table { get; set; }
 }
 
 public class SlideContentTypes
 {
     public const string Text = "text";
     public const string Image = "image";
-    public const string GraphicFrame = "graphicFrame";
+    public const string Table = "table";
+    // public const string GraphicFrame = "graphicFrame";
+}
+
+public class TableContent
+{
+    public List<TableRow> Rows { get; set; } = [];
+}
+
+public class TableRow
+{
+    public List<TableCell> Cells { get; set; } = [];
+}
+
+public class TableCell
+{
+    public required string ContentType { get; set; }
+    public string? Text { get; set; }
 }

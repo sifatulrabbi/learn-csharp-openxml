@@ -1,4 +1,3 @@
-using System.Globalization;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Presentation;
 using D = DocumentFormat.OpenXml.Drawing;
@@ -202,21 +201,30 @@ internal class PptxDataExtractor
             switch (element)
             {
                 case Shape shape:
-                    var textList = shape.Descendants<D.Paragraph>();
-                    if (textList.Any())
-                    {
-                        var text = textList.ElementAt(0);
-                        contents.Add(
-                            new() { ContentType = SlideContentTypes.Text, Text = text.InnerText }
-                        );
-                    }
+                    if (shape.TextBody == null)
+                        break;
+                    var paragraphTexts = shape
+                        .TextBody.Elements<D.Paragraph>()
+                        .Select(p => string.Concat(p.Elements<D.Run>().Select(r => r.Text?.Text)))
+                        .Where(t => !string.IsNullOrEmpty(t));
+                    foreach (var txt in paragraphTexts)
+                        contents.Add(new() { ContentType = SlideContentTypes.Text, Text = txt });
                     break;
+
                 case Picture picture:
-                    // TODO:
+                    var imageUrl = GetImageUrl(picture, slidePart);
+                    if (!string.IsNullOrEmpty(imageUrl))
+                        contents.Add(
+                            new() { ContentType = SlideContentTypes.Image, ImageUrl = imageUrl }
+                        );
                     break;
+
                 case GraphicFrame frame:
-                    // TODO:
+                    var graphicFrame = ExtractGraphicFrame(frame, slidePart);
+                    if (graphicFrame != null)
+                        contents.Add(graphicFrame);
                     break;
+
                 case ContentPart:
                 case GroupShape:
                 case ConnectionShape:
@@ -232,12 +240,54 @@ internal class PptxDataExtractor
             }
         }
 
-        return new Slide
+        return new()
         {
             SlideId = id,
             LayoutName = slidePart.SlideLayoutPart?.SlideLayout?.CommonSlideData?.Name?.Value ?? "",
             Contents = contents,
         };
+    }
+
+    private static string GetImageUrl(Picture picture, SlidePart slidePart)
+    {
+        var embedId = picture.BlipFill?.Blip?.Embed?.Value;
+        if (embedId == null)
+            return "";
+        var imagePart = (ImagePart)slidePart.GetPartById(embedId);
+        return imagePart.Uri.ToString();
+    }
+
+    private static SlideContent? ExtractGraphicFrame(GraphicFrame frame, SlidePart _)
+    {
+        var table = frame.Graphic?.GraphicData?.GetFirstChild<D.Table>();
+        if (table != null)
+        {
+            TableContent tableContent = new();
+            foreach (var row in table.Elements<D.TableRow>())
+            {
+                TableRow tableRow = new();
+                foreach (var cell in row.Elements<D.TableCell>())
+                {
+                    var cellText = "";
+                    if (cell.TextBody != null)
+                    {
+                        cellText = string.Join(
+                            Environment.NewLine,
+                            cell.TextBody.Elements<D.Paragraph>()
+                                .Select(p =>
+                                    string.Concat(p.Elements<D.Run>().Select(r => r.Text?.Text))
+                                )
+                        );
+                    }
+                    tableRow.Cells.Add(
+                        new() { ContentType = SlideContentTypes.Text, Text = cellText }
+                    );
+                }
+                tableContent.Rows.Add(tableRow);
+            }
+            return new() { ContentType = SlideContentTypes.Table, Table = tableContent };
+        }
+        return null;
     }
 
     private static void PrintDescendentTree(SlidePart slidePart)

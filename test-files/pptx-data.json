@@ -96,16 +96,22 @@
       "LayoutName": "Slide 1 master",
       "Contents": [
         {
+          "ContentType": "image",
+          "Text": null,
+          "ImageBase64": "/ppt/media/image-1-1.png",
+          "Table": null
+        },
+        {
           "ContentType": "text",
           "Text": "Response to TeleComX AI\u2011Driven Customer Support Chatbot",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "May 2025",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         }
       ]
     },
@@ -116,44 +122,44 @@
         {
           "ContentType": "text",
           "Text": "Agenda",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Client \u0026 Market Overview",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Project Goals \u0026 ROI",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Scope of Work",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Technical Approach",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Data Privacy \u0026 Security",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Timeline \u0026 Next Steps",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         }
       ]
     },
@@ -164,44 +170,50 @@
         {
           "ContentType": "text",
           "Text": "Client \u0026 Market Overview",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "TeleComX: Bangladesh Leader",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Serves 10\u002B million customers nationwide.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Leading telecom provider, committed to innovation.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
+        },
+        {
+          "ContentType": "image",
+          "Text": null,
+          "ImageBase64": "/ppt/media/image-3-1.png",
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Market Demand",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Fast-growing need for self-service \u0026 24/7 support.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Opportunity to reduce costs \u0026 boost satisfaction.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         }
       ]
     },
@@ -210,76 +222,82 @@
       "LayoutName": "Slide 4 master",
       "Contents": [
         {
+          "ContentType": "image",
+          "Text": null,
+          "ImageBase64": "/ppt/media/image-4-1.png",
+          "Table": null
+        },
+        {
           "ContentType": "text",
           "Text": "Project Goals \u0026 ROI",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "80%",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Automate Queries",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Common customer inquiries.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "2",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Bilingual Support",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "English \u0026 Bengali.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "50%",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Reduce Response Time",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Average customer query time.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Seamless Salesforce CRM \u0026 Zendesk integration.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Improve CSAT \u0026 lower agent workload.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         }
       ]
     },
@@ -290,68 +308,68 @@
         {
           "ContentType": "text",
           "Text": "Scope of Work",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Define Requirements",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Finalize use cases \u0026 conversation flows.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Develop Chatbot",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "NLU-powered for web \u0026 mobile.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Integrate Systems",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Salesforce CRM \u0026 Zendesk APIs.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Admin Dashboard",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Monitoring, analytics, conversation management.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Deploy \u0026 Support",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Testing, training, 6-month post-launch support.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         }
       ]
     },
@@ -362,38 +380,44 @@
         {
           "ContentType": "text",
           "Text": "Technical Approach",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
+        },
+        {
+          "ContentType": "image",
+          "Text": null,
+          "ImageBase64": "/ppt/media/image-6-1.png",
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Cloud-native, microservices architecture for 99.9% uptime.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "RESTful APIs with OAuth2, JSON, HTTPS, rate-limit handling.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "React widget for web; Flutter SDK for mobile apps.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Context management for seamless live agent escalation.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Multimedia support: text, images, links.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         }
       ]
     },
@@ -404,68 +428,98 @@
         {
           "ContentType": "text",
           "Text": "Data Privacy \u0026 Security",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
+        },
+        {
+          "ContentType": "image",
+          "Text": null,
+          "ImageBase64": "/ppt/media/image-7-1.png",
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Compliance",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "GDPR \u0026 Bangladesh Data Protection Act.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
+        },
+        {
+          "ContentType": "image",
+          "Text": null,
+          "ImageBase64": "/ppt/media/image-7-2.png",
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Data Residency",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "In Bangladesh; no cross-border transfer without consent.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
+        },
+        {
+          "ContentType": "image",
+          "Text": null,
+          "ImageBase64": "/ppt/media/image-7-3.png",
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Encryption",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "TLS 1.2\u002B in transit; AES-256 at rest.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
+        },
+        {
+          "ContentType": "image",
+          "Text": null,
+          "ImageBase64": "/ppt/media/image-7-4.png",
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Access Control",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Role-based access \u0026 full audit logging.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
+        },
+        {
+          "ContentType": "image",
+          "Text": null,
+          "ImageBase64": "/ppt/media/image-7-5.png",
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Breach Reporting",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "24-hour reporting \u0026 mandatory staff training.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         }
       ]
     },
@@ -476,8 +530,14 @@
         {
           "ContentType": "text",
           "Text": "Timeline \u0026 Key Milestones",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
+        },
+        {
+          "ContentType": "image",
+          "Text": null,
+          "ImageBase64": "/ppt/media/image-8-1.png",
+          "Table": null
         }
       ]
     },
@@ -488,56 +548,62 @@
         {
           "ContentType": "text",
           "Text": "Next Steps \u0026 Contacts",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Next Steps",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Review proposal \u0026 finalize contract.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Schedule detailed scoping workshops.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Assign TeleComX \u0026 vendor project teams.",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Key Contacts",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Imran Hossain (Project Owner)",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Farhana Rahman (Executive Sponsor)",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
         },
         {
           "ContentType": "text",
           "Text": "Sazzad Mahmud (Procurement Backup)",
-          "ImageUrl": null,
-          "ImageBase64": null
+          "ImageBase64": null,
+          "Table": null
+        },
+        {
+          "ContentType": "image",
+          "Text": null,
+          "ImageBase64": "/ppt/media/image-9-1.png",
+          "Table": null
         }
       ]
     }
