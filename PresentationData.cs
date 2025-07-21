@@ -8,27 +8,27 @@ public class PresentationData
     public string Creator { get; set; } = "James SEQUESTO";
     public DateTime Created { get; set; } = DateTime.UtcNow;
     public DateTime Modified { get; set; } = DateTime.UtcNow;
-    public required SlideSize SlideSize { get; set; }
-    public required NoteSize NoteSize { get; set; }
-    public required Theme GlobalTheme { get; set; }
-    public required List<SlideMaster> SlideMasters { get; set; }
-    public required List<Slide> Slides { get; set; }
+    public required PptxSlideSize SlideSize { get; set; }
+    public required PptxNoteSize NoteSize { get; set; }
+    public required PptxTheme GlobalTheme { get; set; }
+    public required List<PptxSlideMaster> SlideMasters { get; set; }
+    public required List<PptxSlide> Slides { get; set; }
 }
 
-public class SlideSize
+public class PptxSlideSize
 {
     public required long Width { get; set; }
     public required long Height { get; set; }
     public required string Type { get; set; }
 }
 
-public class NoteSize
+public class PptxNoteSize
 {
     public required long Width { get; set; }
     public required long Height { get; set; }
 }
 
-public class Theme
+public class PptxTheme
 {
     public required string Dark1 { get; set; }
     public required string Light1 { get; set; }
@@ -44,36 +44,36 @@ public class Theme
     public required string FollowedHyperlink { get; set; }
 }
 
-public class SlideMaster
+public class PptxSlideMaster
 {
     public required string Name { get; set; }
     public required List<string> SlideLayoutIds { get; set; }
-    public required List<SlideLayout> SlideLayouts { get; set; }
-    public required Theme Theme { get; set; }
+    public required List<PptxSlideLayout> SlideLayouts { get; set; }
+    public required PptxTheme Theme { get; set; }
 }
 
-public class SlideLayout
+public class PptxSlideLayout
 {
     public required string Name { get; set; }
     public required string TypeName { get; set; }
 }
 
-public class Slide
+public class PptxSlide
 {
     public required uint SlideId { get; set; }
     public required string LayoutName { get; set; }
-    public required List<SlideContent> Contents { get; set; }
+    public required List<PptxSlideContent> Contents { get; set; }
 }
 
-public class SlideContent
+public class PptxSlideContent
 {
     public required string ContentType { get; set; }
     public string? Text { get; set; }
     public string? ImageUrl { get; set; }
-    public TableContent? Table { get; set; }
+    public PptxTableContent? Table { get; set; }
 }
 
-public class SlideContentTypes
+public class PptxSlideContentTypes
 {
     public const string Text = "text";
     public const string Image = "image";
@@ -81,17 +81,17 @@ public class SlideContentTypes
     // public const string GraphicFrame = "graphicFrame";
 }
 
-public class TableContent
+public class PptxTableContent
 {
-    public List<TableRow> Rows { get; set; } = [];
+    public List<PptxTableRow> Rows { get; set; } = [];
 }
 
-public class TableRow
+public class PptxTableRow
 {
-    public List<TableCell> Cells { get; set; } = [];
+    public List<PptxTableCell> Cells { get; set; } = [];
 }
 
-public class TableCell
+public class PptxTableCell
 {
     public required string ContentType { get; set; }
     public string? Text { get; set; }

@@ -102,7 +102,7 @@ internal class PptxDataModifier
         }
     }
 
-    private static void UpdateSlideText(SlidePart slidePart, List<SlideContent> newTexts)
+    private static void UpdateSlideText(SlidePart slidePart, List<PptxSlideContent> newTexts)
     {
         var textElements = slidePart.Slide.Descendants<D.Text>().ToList();
         for (int i = 0; i < Math.Min(textElements.Count, newTexts.Count); i++)

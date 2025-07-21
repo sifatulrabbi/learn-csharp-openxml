@@ -31,7 +31,7 @@ internal class PptxDataExtractor
         var modified = coreProps.Modified ?? DateTime.MinValue;
 
         // Extract slide size
-        var slideSize = new SlideSize
+        var slideSize = new PptxSlideSize
         {
             Width = pptx.PresentationPart!.Presentation!.SlideSize?.Cx?.Value ?? 0,
             Height = pptx.PresentationPart.Presentation.SlideSize?.Cy?.Value ?? 0,
@@ -39,40 +39,23 @@ internal class PptxDataExtractor
         };
 
         // Extract note size
-        var noteSize = new NoteSize
+        var noteSize = new PptxNoteSize
         {
             Width = pptx.PresentationPart.Presentation.NotesSize?.Cx?.Value ?? 0,
             Height = pptx.PresentationPart.Presentation.NotesSize?.Cy?.Value ?? 0,
         };
 
         // Extract presentation-level theme (even when masters exist)
-        var globalTheme =
-            pptx.PresentationPart.ThemePart != null && pptx.PresentationPart.ThemePart.Theme != null
-                ? ExtractThemeInfo(pptx.PresentationPart.ThemePart)
-                : new Theme
-                {
-                    Dark1 = "",
-                    Light1 = "",
-                    Dark2 = "",
-                    Light2 = "",
-                    Accent1 = "",
-                    Accent2 = "",
-                    Accent3 = "",
-                    Accent4 = "",
-                    Accent5 = "",
-                    Accent6 = "",
-                    Hyperlink = "",
-                    FollowedHyperlink = "",
-                };
+        var globalTheme = ExtractThemeInfo(pptx.PresentationPart.ThemePart);
 
         // Extract slide masters
-        var masterParts = new List<SlideMaster>();
+        var masterParts = new List<PptxSlideMaster>();
         foreach (var slideMasterPart in pptx.PresentationPart.SlideMasterParts)
             if (slideMasterPart.SlideMaster != null)
                 masterParts.Add(ExtractMasterInfo(slideMasterPart));
 
         // Extract all slides
-        var slideInfos = new List<Slide>();
+        var slideInfos = new List<PptxSlide>();
         var slideIds = pptx.PresentationPart.Presentation!.SlideIdList?.Elements<SlideId>();
         if (slideIds != null)
             foreach (var slideId in slideIds)
@@ -101,7 +84,7 @@ internal class PptxDataExtractor
         };
     }
 
-    private static SlideMaster ExtractMasterInfo(SlideMasterPart masterPart)
+    private static PptxSlideMaster ExtractMasterInfo(SlideMasterPart masterPart)
     {
         var name = masterPart.SlideMaster?.CommonSlideData?.Name?.Value ?? "slide-master-part";
 
@@ -117,7 +100,7 @@ internal class PptxDataExtractor
         }
 
         // Extract layouts for slide masters
-        var layoutParts = new List<SlideLayout>();
+        var layoutParts = new List<PptxSlideLayout>();
         if (masterPart.SlideLayoutParts != null)
         {
             foreach (var layoutPart in masterPart.SlideLayoutParts)
@@ -127,7 +110,7 @@ internal class PptxDataExtractor
         // Extract theme information
         var theme = ExtractThemeInfo(masterPart.ThemePart);
 
-        return new SlideMaster
+        return new PptxSlideMaster
         {
             Name = name,
             SlideLayoutIds = slideLayoutIdList,
@@ -136,21 +119,21 @@ internal class PptxDataExtractor
         };
     }
 
-    private static SlideLayout ExtractLayoutInfo(SlideLayoutPart layoutPart)
+    private static PptxSlideLayout ExtractLayoutInfo(SlideLayoutPart layoutPart)
     {
         var layout = layoutPart.SlideLayout;
-        return new SlideLayout
+        return new PptxSlideLayout
         {
             Name = layout?.CommonSlideData?.Name?.Value ?? "Default layout",
             TypeName = layout?.Type?.ToString() ?? "",
         };
     }
 
-    private static Theme ExtractThemeInfo(ThemePart? themePart)
+    private static PptxTheme ExtractThemeInfo(ThemePart? themePart)
     {
         if (themePart == null || themePart.Theme.ThemeElements?.ColorScheme == null)
         {
-            return new Theme
+            return new PptxTheme
             {
                 Dark1 = "",
                 Light1 = "",
@@ -168,7 +151,7 @@ internal class PptxDataExtractor
         }
         var colorScheme = themePart.Theme.ThemeElements!.ColorScheme!;
 
-        return new Theme
+        return new PptxTheme
         {
             Dark1 = colorScheme.Dark1Color?.RgbColorModelHex?.Val?.Value ?? "",
             Light1 = colorScheme.Light1Color?.RgbColorModelHex?.Val?.Value ?? "",
@@ -186,11 +169,11 @@ internal class PptxDataExtractor
         };
     }
 
-    private static Slide ExtractSlideInfo(uint id, SlidePart slidePart)
+    private static PptxSlide ExtractSlideInfo(uint id, SlidePart slidePart)
     {
         PrintDescendentTree(slidePart);
 
-        List<SlideContent> contents = [];
+        List<PptxSlideContent> contents = [];
         IEnumerable<ShapeTree> shapeTrees = slidePart.Slide.Descendants<ShapeTree>();
         IEnumerable<DocumentFormat.OpenXml.OpenXmlElement> contentElements = shapeTrees.Any()
             ? shapeTrees.ElementAt(0).Elements()
@@ -208,14 +191,16 @@ internal class PptxDataExtractor
                         .Select(p => string.Concat(p.Elements<D.Run>().Select(r => r.Text?.Text)))
                         .Where(t => !string.IsNullOrEmpty(t));
                     foreach (var txt in paragraphTexts)
-                        contents.Add(new() { ContentType = SlideContentTypes.Text, Text = txt });
+                        contents.Add(
+                            new() { ContentType = PptxSlideContentTypes.Text, Text = txt }
+                        );
                     break;
 
                 case Picture picture:
                     var imageUrl = GetImageUrl(picture, slidePart);
                     if (!string.IsNullOrEmpty(imageUrl))
                         contents.Add(
-                            new() { ContentType = SlideContentTypes.Image, ImageUrl = imageUrl }
+                            new() { ContentType = PptxSlideContentTypes.Image, ImageUrl = imageUrl }
                         );
                     break;
 
@@ -240,7 +225,7 @@ internal class PptxDataExtractor
             }
         }
 
-        return new()
+        return new PptxSlide
         {
             SlideId = id,
             LayoutName = slidePart.SlideLayoutPart?.SlideLayout?.CommonSlideData?.Name?.Value ?? "",
@@ -257,15 +242,15 @@ internal class PptxDataExtractor
         return imagePart.Uri.ToString();
     }
 
-    private static SlideContent? ExtractGraphicFrame(GraphicFrame frame, SlidePart _)
+    private static PptxSlideContent? ExtractGraphicFrame(GraphicFrame frame, SlidePart _)
     {
         var table = frame.Graphic?.GraphicData?.GetFirstChild<D.Table>();
         if (table != null)
         {
-            TableContent tableContent = new();
+            PptxTableContent tableContent = new();
             foreach (var row in table.Elements<D.TableRow>())
             {
-                TableRow tableRow = new();
+                PptxTableRow tableRow = new();
                 foreach (var cell in row.Elements<D.TableCell>())
                 {
                     var cellText = "";
@@ -280,12 +265,12 @@ internal class PptxDataExtractor
                         );
                     }
                     tableRow.Cells.Add(
-                        new() { ContentType = SlideContentTypes.Text, Text = cellText }
+                        new() { ContentType = PptxSlideContentTypes.Text, Text = cellText }
                     );
                 }
                 tableContent.Rows.Add(tableRow);
             }
-            return new() { ContentType = SlideContentTypes.Table, Table = tableContent };
+            return new() { ContentType = PptxSlideContentTypes.Table, Table = tableContent };
         }
         return null;
     }
