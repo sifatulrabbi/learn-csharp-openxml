@@ -203,13 +203,45 @@ internal class PptxDataExtractor
 
     private static Slide ExtractSlideInfo(uint id, SlidePart slidePart)
     {
-        PrintDescendentTree(slidePart);
-        return new Slide
+        Slide slide = new()
         {
             SlideId = id,
             LayoutName = slidePart.SlideLayoutPart?.SlideLayout?.CommonSlideData?.Name?.Value ?? "",
-            Texts = slidePart.Slide.Descendants<D.Text>().Select(t => t.Text).ToList(),
+            Texts = [],
+            // Texts = slidePart.Slide.Descendants<D.Text>().Select(t => t.Text).ToList(),
         };
+
+        PrintDescendentTree(slidePart);
+        IEnumerable<ShapeTree> shapeTrees = slidePart.Slide.Descendants<ShapeTree>();
+        // There is only 1 ShapeTree per Slide and the ShapeTree contains all the content elements within it.
+        IEnumerable<DocumentFormat.OpenXml.OpenXmlElement> contentElements = shapeTrees.Any() ? shapeTrees.ElementAt(0).Elements() : [];
+        foreach (var element in contentElements)
+        {
+            if (element == null) continue;
+            switch (element)
+            {
+                case Shape shape:
+                    break;
+                case Picture picture:
+                    break;
+                case GraphicFrame frame:
+                    break;
+                case GroupShape groupShape:
+                    break;
+                case ConnectionShape connector:
+                    break;
+                case ContentPart contentPart:
+                    break;
+                case NonVisualGroupShapeProperties:
+                case GroupShapeProperties:
+                    break;
+                default:
+                    Console.WriteLine($"Unknown content type encountered: {element.GetType().Name}");
+                    break;
+            }
+        }
+
+        return slide;
     }
 
     private static void PrintDescendentTree(SlidePart slidePart)

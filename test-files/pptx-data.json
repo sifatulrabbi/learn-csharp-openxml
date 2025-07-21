@@ -1,28 +1,28 @@
 {
-  "Title": "Testing presentation with James",
-  "Subject": "Testing",
+  "Title": "",
+  "Subject": "",
   "Description": "",
   "Creator": "James SEQUESTO",
-  "Created": "2023-12-12T22:04:07+06:00",
-  "Modified": "2025-07-18T10:07:01.634494+06:00",
+  "Created": "2025-07-21T10:33:51+06:00",
+  "Modified": "2025-07-21T10:33:51+06:00",
   "SlideSize": {
-    "Width": 12192000,
-    "Height": 6858000,
+    "Width": 14630400,
+    "Height": 8229600,
     "Type": ""
   },
   "NoteSize": {
-    "Width": 6858000,
-    "Height": 9144000
+    "Width": 8229600,
+    "Height": 14630400
   },
   "GlobalTheme": {
-    "Dark1": "000000",
-    "Light1": "FFFFFF",
+    "Dark1": "",
+    "Light1": "",
     "Dark2": "44546A",
     "Light2": "E7E6E6",
-    "Accent1": "0068FF",
-    "Accent2": "DAE5EF",
-    "Accent3": "637183",
-    "Accent4": "434E5E",
+    "Accent1": "4472C4",
+    "Accent2": "ED7D31",
+    "Accent3": "A5A5A5",
+    "Accent4": "FFC000",
     "Accent5": "5B9BD5",
     "Accent6": "70AD47",
     "Hyperlink": "0563C1",
@@ -34,67 +34,55 @@
       "SlideLayoutIds": [],
       "SlideLayouts": [
         {
-          "Name": "Title and 2 content",
+          "Name": "DEFAULT",
           "TypeName": ""
         },
         {
-          "Name": "End Slide",
-          "TypeName": "title"
-        },
-        {
-          "Name": "Title and Right Image",
+          "Name": "Slide 1 master",
           "TypeName": ""
         },
         {
-          "Name": "Title and 2 Column Content",
+          "Name": "Slide 2 master",
           "TypeName": ""
         },
         {
-          "Name": "Chart ",
-          "TypeName": "obj"
-        },
-        {
-          "Name": "Title and Content",
-          "TypeName": "obj"
-        },
-        {
-          "Name": "Title Slide",
+          "Name": "Slide 3 master",
           "TypeName": ""
         },
         {
-          "Name": "Section title",
-          "TypeName": "title"
-        },
-        {
-          "Name": "Title and Content and Image 2",
+          "Name": "Slide 4 master",
           "TypeName": ""
         },
         {
-          "Name": "Title and content 2",
+          "Name": "Slide 5 master",
           "TypeName": ""
         },
         {
-          "Name": "SmartArt 2",
+          "Name": "Slide 6 master",
           "TypeName": ""
         },
         {
-          "Name": "Title and Left Image",
+          "Name": "Slide 7 master",
           "TypeName": ""
         },
         {
-          "Name": "Title and Content and Image 1",
+          "Name": "Slide 8 master",
+          "TypeName": ""
+        },
+        {
+          "Name": "Slide 9 master",
           "TypeName": ""
         }
       ],
       "Theme": {
-        "Dark1": "000000",
-        "Light1": "FFFFFF",
+        "Dark1": "",
+        "Light1": "",
         "Dark2": "44546A",
         "Light2": "E7E6E6",
-        "Accent1": "0068FF",
-        "Accent2": "DAE5EF",
-        "Accent3": "637183",
-        "Accent4": "434E5E",
+        "Accent1": "4472C4",
+        "Accent2": "ED7D31",
+        "Accent3": "A5A5A5",
+        "Accent4": "FFC000",
         "Accent5": "5B9BD5",
         "Accent6": "70AD47",
         "Hyperlink": "0563C1",
@@ -105,192 +93,131 @@
   "Slides": [
     {
       "SlideId": 256,
-      "LayoutName": "Title Slide",
+      "LayoutName": "Slide 1 master",
       "Texts": [
-        "Updated Basic Presentation"
+        "Response to TeleComX AI\u2011Driven Customer Support Chatbot",
+        "May 2025"
       ]
     },
     {
       "SlideId": 257,
-      "LayoutName": "Title and Content",
+      "LayoutName": "Slide 2 master",
       "Texts": [
         "Agenda",
-        "Introduction",
-        "Building confidence",
-        "Engaging the audience",
-        "Visual aids",
-        "Final tips \u0026 takeaways"
+        "Client \u0026 Market Overview",
+        "Project Goals \u0026 ROI",
+        "Scope of Work",
+        "Technical Approach",
+        "Data Privacy \u0026 Security",
+        "Timeline \u0026 Next Steps"
       ]
     },
     {
-      "SlideId": 286,
-      "LayoutName": "Title and Right Image",
+      "SlideId": 258,
+      "LayoutName": "Slide 3 master",
       "Texts": [
-        "The power of communication"
+        "Client \u0026 Market Overview",
+        "TeleComX: Bangladesh Leader",
+        "Serves ",
+        "10\u002B million customers",
+        " nationwide.",
+        "Leading telecom provider, committed to innovation.",
+        "Market Demand",
+        "Fast-growing need for self-service \u0026 24/7 support.",
+        "Opportunity to ",
+        "reduce costs",
+        " \u0026 ",
+        "boost satisfaction",
+        "."
       ]
     },
     {
-      "SlideId": 288,
-      "LayoutName": "Title and Left Image",
+      "SlideId": 259,
+      "LayoutName": "Slide 4 master",
       "Texts": [
-        "Overcoming nervousness",
-        "Confidence-building strategies"
+        "Project Goals \u0026 ROI",
+        "80%",
+        "Automate Queries",
+        "Common customer inquiries.",
+        "2",
+        "Bilingual Support",
+        "English \u0026 Bengali.",
+        "50%",
+        "Reduce Response Time",
+        "Average customer query time.",
+        "Seamless Salesforce CRM \u0026 Zendesk integration.",
+        "Improve CSAT \u0026 lower agent workload."
       ]
     },
     {
-      "SlideId": 289,
-      "LayoutName": "Title and content 2",
+      "SlideId": 260,
+      "LayoutName": "Slide 5 master",
       "Texts": [
-        "Engaging the audience",
-        "Make eye contact with your audience to create a sense of intimacy and involvement",
-        "Weave relatable stories into your presentation using narratives that\u00A0make your message memorable and impactful",
-        "Encourage questions and provide thoughtful responses to\u00A0enhance audience participation",
-        "Use live polls or surveys to gather audience opinions, promoting engagement and making sure\u00A0the audience feel involved"
+        "Scope of Work",
+        "Define Requirements",
+        "Finalize use cases \u0026 conversation flows.",
+        "Develop Chatbot",
+        "NLU-powered for web \u0026 mobile.",
+        "Integrate Systems",
+        "Salesforce CRM \u0026 Zendesk APIs.",
+        "Admin Dashboard",
+        "Monitoring, analytics, conversation management.",
+        "Deploy \u0026 Support",
+        "Testing, training, 6-month post-launch support."
       ]
     },
     {
-      "SlideId": 297,
-      "LayoutName": "Section title",
+      "SlideId": 261,
+      "LayoutName": "Slide 6 master",
       "Texts": [
-        "Selecting ",
-        "visual aids",
-        "Enhancing your presentation"
+        "Technical Approach",
+        "Cloud-native, microservices architecture for 99.9% uptime.",
+        "RESTful APIs with OAuth2, JSON, HTTPS, rate-limit handling.",
+        "React widget for web; Flutter SDK for mobile apps.",
+        "Context management for seamless live agent escalation.",
+        "Multimedia support: text, images, links."
       ]
     },
     {
-      "SlideId": 290,
-      "LayoutName": "Title and 2 Column Content",
+      "SlideId": 262,
+      "LayoutName": "Slide 7 master",
       "Texts": [
-        "Effective delivery techniques",
-        "This is a powerful tool in public speaking. It involves varying pitch, tone, and volume to convey emotion, emphasize points, and maintain interest: ",
-        "Pitch variation",
-        "Tone inflection",
-        "Volume control",
-        "Effective body language enhances your message, making it more impactful ",
-        "and memorable:",
-        "Meaningful eye contact",
-        "Purposeful gestures",
-        "Maintain good posture",
-        "Control your expressions"
+        "Data Privacy \u0026 Security",
+        "Compliance",
+        "GDPR \u0026 Bangladesh Data Protection Act.",
+        "Data Residency",
+        "In Bangladesh; no cross-border transfer without consent.",
+        "Encryption",
+        "TLS 1.2\u002B in transit; AES-256 at rest.",
+        "Access Control",
+        "Role-based access \u0026 full audit logging.",
+        "Breach Reporting",
+        "24-hour reporting \u0026 mandatory staff training."
       ]
     },
     {
-      "SlideId": 291,
-      "LayoutName": "Title and 2 content",
+      "SlideId": 263,
+      "LayoutName": "Slide 8 master",
       "Texts": [
-        "Navigating Q\u0026A sessions",
-        "Know your material in advance",
-        "Anticipate common questions",
-        "Rehearse your responses",
-        "Maintaining composure during the Q\u0026A session is essential for projecting confidence and authority. Consider the following tips for staying composed:",
-        "Stay calm",
-        "Actively listen",
-        "Pause and reflect",
-        "Maintain eye contact"
+        "Timeline \u0026 Key Milestones"
       ]
     },
     {
-      "SlideId": 292,
-      "LayoutName": "Title and Content and Image 1",
+      "SlideId": 264,
+      "LayoutName": "Slide 9 master",
       "Texts": [
-        "Speaking impact ",
-        "Your ability to communicate effectively will leave a lasting impact on your audience",
-        "Effectively communicating involves not only delivering a message but also resonating with the experiences, values, and emotions of those listening\u00A0"
-      ]
-    },
-    {
-      "SlideId": 295,
-      "LayoutName": "SmartArt 2",
-      "Texts": [
-        "Dynamic delivery",
-        "Learn to infuse energy into your delivery to leave a lasting impression",
-        "One of the goals of effective communication is to motivate your audience",
-        "Metric",
-        "Measurement",
-        "Target",
-        "Actual",
-        "Audience attendance",
-        "# of attendees",
-        "150",
-        "120",
-        "Engagement duration",
-        "Minutes",
-        "60",
-        "75",
-        "Q\u0026A interaction",
-        "# of questions",
-        "10",
-        "15",
-        "Positive feedback",
-        "Percentage (%)",
-        "90",
-        "95",
-        "Rate of information retention",
-        "Percentage (%)",
-        "80",
-        "85"
-      ]
-    },
-    {
-      "SlideId": 294,
-      "LayoutName": "Title and Content and Image 2",
-      "Texts": [
-        "Final tips \u0026 takeaways",
-        "Seek feedback",
-        "Reflect on performance",
-        "Explore new techniques",
-        "Set personal goals",
-        "Iterate and adapt",
-        "Consistent rehearsal",
-        "Strengthen your familiarity",
-        "Refine delivery style",
-        "Pacing, tone, and emphasis",
-        "Timing and transitions",
-        "Aim for seamless, professional delivery",
-        "Practice audience",
-        "Enlist colleagues to listen \u0026 provide feedback"
-      ]
-    },
-    {
-      "SlideId": 298,
-      "LayoutName": "Chart ",
-      "Texts": [
-        "Speaking engagement metrics",
-        "Impact factor",
-        "Measurement",
-        "Target",
-        "Achieved",
-        "Audience interaction",
-        "Percentage (%)",
-        "85",
-        "88",
-        "Knowledge retention",
-        "Percentage (%)",
-        "75",
-        "80",
-        "Post-presentation surveys",
-        "Average rating",
-        "4.2",
-        "4.5",
-        "Referral rate",
-        "Percentage (%)",
-        "10",
-        "12",
-        "Collaboration opportunities",
-        "# of opportunities",
-        "8",
-        "10"
-      ]
-    },
-    {
-      "SlideId": 296,
-      "LayoutName": "End Slide",
-      "Texts": [
-        "Thank you",
-        "Sifatul Rabbi",
-        "502-555-0152",
-        "sifatul.rabbi@sequesto.com",
-        "sifatulrabbi.com"
+        "Next Steps \u0026 Contacts",
+        "Next Steps",
+        "Review proposal \u0026 finalize contract.",
+        "Schedule detailed scoping workshops.",
+        "Assign TeleComX \u0026 vendor project teams.",
+        "Key Contacts",
+        "Imran Hossain",
+        " (Project Owner)",
+        "Farhana Rahman",
+        " (Executive Sponsor)",
+        "Sazzad Mahmud",
+        " (Procurement Backup)"
       ]
     }
   ]

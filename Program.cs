@@ -5,8 +5,8 @@ namespace CsharpOpenXML;
 
 public class Program
 {
-    private static readonly string testPptxFile =
-        "./test-files/universal-presentation-fdsfa3432412f.pptx";
+    private static readonly string testPptxFile = "./test-files/Response-to-TeleComX-AIDriven-Customer-Support-Chatbot.pptx";
+    //    "./test-files/universal-presentation-fdsfa3432412f.pptx";
 
     public static void Main(string[] args)
     {
@@ -35,13 +35,10 @@ internal class TestingOutOpenXML(string filePath)
         else
         {
             PptxDataExtractor extractor = new(pptx);
-            var extractedInfo = extractor.ExtractAll();
-            // Save to JSON file
-            var jsonFilePath = "./test-files/pptx-data.json";
-            var jsonContent = JsonSerializer.Serialize(extractedInfo, jsonSerializerOptions);
+            PresentationData extractedInfo = extractor.ExtractAll();
+            string jsonFilePath = "./test-files/pptx-data.json";
+            string jsonContent = JsonSerializer.Serialize(extractedInfo, jsonSerializerOptions);
             File.WriteAllText(jsonFilePath, jsonContent);
-            // Also print to console for reference
-            Console.WriteLine(JsonSerializer.Serialize(extractedInfo, jsonSerializerOptions));
         }
         pptx.Dispose();
     }
