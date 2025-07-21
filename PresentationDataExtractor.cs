@@ -190,6 +190,8 @@ internal class PptxDataExtractor
     private static Slide ExtractSlideInfo(uint id, SlidePart slidePart)
     {
         PrintDescendentTree(slidePart);
+
+        List<SlideContent> contents = [];
         IEnumerable<ShapeTree> shapeTrees = slidePart.Slide.Descendants<ShapeTree>();
         IEnumerable<DocumentFormat.OpenXml.OpenXmlElement> contentElements = shapeTrees.Any()
             ? shapeTrees.ElementAt(0).Elements()
@@ -200,7 +202,14 @@ internal class PptxDataExtractor
             switch (element)
             {
                 case Shape shape:
-                    // TODO:
+                    var textList = shape.Descendants<D.Paragraph>();
+                    if (textList.Any())
+                    {
+                        var text = textList.ElementAt(0);
+                        contents.Add(
+                            new() { ContentType = SlideContentTypes.Text, Text = text.InnerText }
+                        );
+                    }
                     break;
                 case Picture picture:
                     // TODO:
@@ -208,14 +217,9 @@ internal class PptxDataExtractor
                 case GraphicFrame frame:
                     // TODO:
                     break;
-                case GroupShape groupShape:
-                    // TODO:
-                    break;
-                case ConnectionShape connector:
-                    // TODO:
-                    break;
-                case ContentPart contentPart:
-                    break;
+                case ContentPart:
+                case GroupShape:
+                case ConnectionShape:
                 case NonVisualGroupShapeProperties:
                 case GroupShapeProperties:
                 case null:
@@ -232,7 +236,7 @@ internal class PptxDataExtractor
         {
             SlideId = id,
             LayoutName = slidePart.SlideLayoutPart?.SlideLayout?.CommonSlideData?.Name?.Value ?? "",
-            Texts = [],
+            Contents = contents,
         };
     }
 

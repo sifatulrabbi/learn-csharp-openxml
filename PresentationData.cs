@@ -62,5 +62,20 @@ public class Slide
 {
     public required uint SlideId { get; set; }
     public required string LayoutName { get; set; }
-    public required List<string> Texts { get; set; }
+    public required List<SlideContent> Contents { get; set; }
+}
+
+public class SlideContent
+{
+    public required string ContentType { get; set; }
+    public string? Text { get; set; }
+    public string? ImageUrl { get; set; }
+    public string? ImageBase64 { get; set; }
+}
+
+public class SlideContentTypes
+{
+    public const string Text = "text";
+    public const string Image = "image";
+    public const string GraphicFrame = "graphicFrame";
 }

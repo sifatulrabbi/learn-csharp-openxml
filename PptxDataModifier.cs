@@ -98,16 +98,22 @@ internal class PptxDataModifier
 
             var slidePart = (SlidePart)
                 pptx.PresentationPart.GetPartById(slideId.RelationshipId.Value);
-            UpdateSlideText(slidePart, slideData.Texts);
+            UpdateSlideText(slidePart, slideData.Contents);
         }
     }
 
-    private static void UpdateSlideText(SlidePart slidePart, List<string> newTexts)
+    private static void UpdateSlideText(SlidePart slidePart, List<SlideContent> newTexts)
     {
         var textElements = slidePart.Slide.Descendants<D.Text>().ToList();
         for (int i = 0; i < Math.Min(textElements.Count, newTexts.Count); i++)
         {
-            textElements[i].Text = newTexts[i];
+            if (string.IsNullOrEmpty(newTexts[i].Text))
+                textElements[i].Text = newTexts[i].Text!;
+            // TODO: implement image insertion.
+            // else if (string.IsNullOrEmpty(newTexts[i].ImageBase64))
+            //     textElements[i].Text = newTexts[i].ImageBase64!;
+            // else if (string.IsNullOrEmpty(newTexts[i].ImageUrl))
+            //     textElements[i].Text = newTexts[i].ImageUrl!;
         }
         slidePart.Slide.Save();
     }
