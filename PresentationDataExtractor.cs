@@ -1,3 +1,4 @@
+using System.Globalization;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Presentation;
 using D = DocumentFormat.OpenXml.Drawing;
@@ -125,24 +126,7 @@ internal class PptxDataExtractor
         }
 
         // Extract theme information
-        var theme =
-            masterPart.ThemePart != null
-                ? ExtractThemeInfo(masterPart.ThemePart)
-                : new Theme
-                {
-                    Dark1 = "",
-                    Light1 = "",
-                    Dark2 = "",
-                    Light2 = "",
-                    Accent1 = "",
-                    Accent2 = "",
-                    Accent3 = "",
-                    Accent4 = "",
-                    Accent5 = "",
-                    Accent6 = "",
-                    Hyperlink = "",
-                    FollowedHyperlink = "",
-                };
+        var theme = ExtractThemeInfo(masterPart.ThemePart);
 
         return new SlideMaster
         {
@@ -163,10 +147,10 @@ internal class PptxDataExtractor
         };
     }
 
-    private static Theme ExtractThemeInfo(ThemePart themePart)
+    private static Theme ExtractThemeInfo(ThemePart? themePart)
     {
-        var colorScheme = themePart.Theme.ThemeElements?.ColorScheme;
-        if (colorScheme == null)
+        if (themePart == null || themePart.Theme.ThemeElements?.ColorScheme == null)
+        {
             return new Theme
             {
                 Dark1 = "",
@@ -182,6 +166,8 @@ internal class PptxDataExtractor
                 Hyperlink = "",
                 FollowedHyperlink = "",
             };
+        }
+        var colorScheme = themePart.Theme.ThemeElements!.ColorScheme!;
 
         return new Theme
         {
@@ -203,45 +189,51 @@ internal class PptxDataExtractor
 
     private static Slide ExtractSlideInfo(uint id, SlidePart slidePart)
     {
-        Slide slide = new()
-        {
-            SlideId = id,
-            LayoutName = slidePart.SlideLayoutPart?.SlideLayout?.CommonSlideData?.Name?.Value ?? "",
-            Texts = [],
-            // Texts = slidePart.Slide.Descendants<D.Text>().Select(t => t.Text).ToList(),
-        };
-
         PrintDescendentTree(slidePart);
         IEnumerable<ShapeTree> shapeTrees = slidePart.Slide.Descendants<ShapeTree>();
-        // There is only 1 ShapeTree per Slide and the ShapeTree contains all the content elements within it.
-        IEnumerable<DocumentFormat.OpenXml.OpenXmlElement> contentElements = shapeTrees.Any() ? shapeTrees.ElementAt(0).Elements() : [];
+        IEnumerable<DocumentFormat.OpenXml.OpenXmlElement> contentElements = shapeTrees.Any()
+            ? shapeTrees.ElementAt(0).Elements()
+            : [];
+
         foreach (var element in contentElements)
         {
-            if (element == null) continue;
             switch (element)
             {
                 case Shape shape:
+                    // TODO:
                     break;
                 case Picture picture:
+                    // TODO:
                     break;
                 case GraphicFrame frame:
+                    // TODO:
                     break;
                 case GroupShape groupShape:
+                    // TODO:
                     break;
                 case ConnectionShape connector:
+                    // TODO:
                     break;
                 case ContentPart contentPart:
                     break;
                 case NonVisualGroupShapeProperties:
                 case GroupShapeProperties:
+                case null:
                     break;
                 default:
-                    Console.WriteLine($"Unknown content type encountered: {element.GetType().Name}");
+                    Console.WriteLine(
+                        $"Unknown content type encountered: {element.GetType().Name}"
+                    );
                     break;
             }
         }
 
-        return slide;
+        return new Slide
+        {
+            SlideId = id,
+            LayoutName = slidePart.SlideLayoutPart?.SlideLayout?.CommonSlideData?.Name?.Value ?? "",
+            Texts = [],
+        };
     }
 
     private static void PrintDescendentTree(SlidePart slidePart)

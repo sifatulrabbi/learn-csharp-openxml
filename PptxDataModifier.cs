@@ -83,16 +83,21 @@ internal class PptxDataModifier
     private void UpdateSlideTexts(PresentationData data)
     {
         var slideParts = pptx.PresentationPart!.SlideParts.ToList();
-        var slideIds = pptx.PresentationPart.Presentation!.SlideIdList?.Elements<SlideId>().ToList();
+        var slideIds = pptx
+            .PresentationPart.Presentation!.SlideIdList?.Elements<SlideId>()
+            .ToList();
 
-        if (slideIds == null) return;
+        if (slideIds == null)
+            return;
 
         foreach (var slideData in data.Slides)
         {
             var slideId = slideIds.FirstOrDefault(s => s.Id?.Value == slideData.SlideId);
-            if (slideId?.RelationshipId?.Value == null) continue;
+            if (slideId?.RelationshipId?.Value == null)
+                continue;
 
-            var slidePart = (SlidePart)pptx.PresentationPart.GetPartById(slideId.RelationshipId.Value);
+            var slidePart = (SlidePart)
+                pptx.PresentationPart.GetPartById(slideId.RelationshipId.Value);
             UpdateSlideText(slidePart, slideData.Texts);
         }
     }
